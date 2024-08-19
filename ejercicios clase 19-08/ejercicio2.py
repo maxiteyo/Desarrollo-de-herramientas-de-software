@@ -28,7 +28,7 @@ def noRepetidos(datos):
     texto= arch.read() #guardo el String en una variable
     lista= texto.split() #separo y guardo en una lista cada palabra del String
     c=set(lista) #creo un conjunto con la lista de Strings (no permite elementos repetidos asi que los filtra)
-    lista=list(c) #vuelco a convertir a lista el conjunto de la linea anterior, como lo pide el ejercicio (devolver una lista)
+    lista=list(c) #vuelvo a convertir a lista el conjunto de la linea anterior, como lo pide el ejercicio (devolver una lista)
     arch.close()
     return lista
 
