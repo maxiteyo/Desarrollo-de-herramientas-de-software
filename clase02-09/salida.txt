@@ -1,0 +1,5 @@
+Ingrese un nombre: Ingrese un nombre: Ingrese un nombre: Ingrese un nombre: Ingrese un nombre: Hola carlos!
+Hola santiago!
+Hola manuel!
+Hola eliseo!
+Hola juan!
