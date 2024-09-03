@@ -1,0 +1,7 @@
+
+FECHA    TMAX  TMIN  NOMBRE                                                                         
+-------- ----- ----- ----------------------------------------                                       
+01092024  15.8   8.2 CAMPO DE MAYO AERO                                                             
+01092024  28.6       CATAMARCA AERO                                                                 
+01092024         5.4 CERES AERO                                                                     
+01092024             CHAMICAL AERO                                                         
