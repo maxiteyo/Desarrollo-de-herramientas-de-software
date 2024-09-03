@@ -4,7 +4,7 @@ nomb= dict() #diccionario con los nombres como clave
 
 
 
-arch= open("testTemperaturas.txt", "r", encoding="iso-8859-1")#Si no le agrego ese encoding no lo sabe leer
+arch= open("registro_temperatura365d_smn.txt", "r", encoding="iso-8859-1")#Si no le agrego ese encoding no lo sabe leer
 lista=arch.readlines()
 l=list()  #lista que tiene cada dato de cada linea
 listaNombres= list() #hago una lista aparte que contenga cada nombre de cada linea para poder mapear el diccionario
@@ -13,7 +13,7 @@ for i in range(len(lista)-3): #le resto 3 para no guardar en la lista los datos 
     l.append(lista[i+3].split())
     
 
-print(l)
+#print(l)
 
 nombre=""
 #GENERO EL DICCIONARIO CON SOLO LOS NOMBRES UNIDOS AHORA SI
@@ -43,9 +43,9 @@ for j in range(len(lista)-3):
     cont+=1
     t= dict() #diccionario con las temperaturas maximas y minimas como clave. Se crea aca ya que los diccionarios se pasan por referencia. Si creo uno mismo para todos cuando modifico un valor cambia para todos
     posiciones = [i for i, char in enumerate(lista[j+3]) if char == ' ']
-    print(f'Posiciones de los espacios en blanco: {posiciones}')
+    #print(f'Posiciones de los espacios en blanco: {posiciones}')
     if(posiciones[2] == 10):
-        t["tmax"]=None
+        t["tmax"]=None  
         
     else:
         if(posiciones[2] != 10):
@@ -53,13 +53,18 @@ for j in range(len(lista)-3):
             t["tmax"]=aux[1] 
             
             
-    if(posiciones[5] == 17 | posiciones[9] == 17):
+    if(posiciones[5] == 17 or posiciones[9] == 17): #no usar | para el or
         t["tmin"]=None
     
     else: 
-        if(posiciones[9] != 17 & posiciones[2]==10):
+        if(posiciones[9] != 17 and posiciones[2]==10): #no usar & para la and
             aux=lista[j+3].split()
             t["tmin"]=aux[1]
+        
+        else:    
+            if(posiciones[5] == 20):
+                    aux=lista[j+3].split()
+                    t["tmin"]=aux[2]
             
     nomb[listaNombres[cont]]=t
     
@@ -71,6 +76,8 @@ for j in range(len(lista)-3):
 
 print("\n")
 print(nomb)
-print(listaNombres)
+#print(listaNombres)
+
+print(nomb["CERES AERO"]["tmin"])
 
 arch.close()
