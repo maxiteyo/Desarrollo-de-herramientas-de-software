@@ -32,52 +32,30 @@ for i in l:
         else:
             for j in range(len(i)-3):# Le resto tres para saltearme los datos de las temperaturas y solo tomar los nombres
                 nombre= nombre +" "+ i[j+3]
-    listaNombres.append(nombre.lstrip())    
-    nomb[nombre.lstrip()] = None  #la funcion lstrip elimina todos los espacios en blanco al inicio del string (PROBLEMA SOLLUCIONADO)
+    listaNombres.append(nombre.lstrip())
+    t=dict()
+    listmax=list()
+    listmin=list() 
+    t["tmax"]=listmax
+    t["tmin"]=listmin
+    nomb[nombre.lstrip()] = t  #la funcion lstrip elimina todos los espacios en blanco al inicio del string (PROBLEMA SOLLUCIONADO)
     nombre=""
 #CREO EL DICCIONARIO DE TMAX Y TMIN y lo asocio al diccionario de los nombres
 
-cont=-1
-for j in range(len(lista)-3):
-    
-    cont+=1
-    t= dict() #diccionario con las temperaturas maximas y minimas como clave. Se crea aca ya que los diccionarios se pasan por referencia. Si creo uno mismo para todos cuando modifico un valor cambia para todos
-    posiciones = [i for i, char in enumerate(lista[j+3]) if char == ' ']
-    #print(f'Posiciones de los espacios en blanco: {posiciones}')
-    if(posiciones[2] == 10):
-        t["tmax"]=None  
-        
-    else:
-        if(posiciones[2] != 10):
-            aux=lista[j+3].split()
-            t["tmax"]=aux[1] 
-            
-            
-    if(posiciones[5] == 17 or posiciones[9] == 17): #no usar | para el or
-        t["tmin"]=None
-    
-    else: 
-        if(posiciones[9] != 17 and posiciones[2]==10): #no usar & para la and
-            aux=lista[j+3].split()
-            t["tmin"]=aux[1]
-        
-        else:    
-            if(posiciones[5] == 20):
-                    aux=lista[j+3].split()
-                    t["tmin"]=aux[2]
-            
-    nomb[listaNombres[cont]]=t
-    
 
+for i in range(len(lista)-3):
 
-#DICCIONARIO "PRINCIPAL" QUE VA A TENER LAS 365 TEMPERATURAS DE CADA LOCALIDAD
-
-
+    nomb[lista[i+3][21:].rstrip()]["tmax"].append(lista[i+3][8:14])
+    nomb[lista[i+3][21:].rstrip()]["tmin"].append(lista[i+3][15:20])
 
 print("\n")
-print(nomb)
+#print(nomb)
 #print(listaNombres)
 
-print(nomb["CERES AERO"]["tmin"])
+
+lugar=input("Ingrese lugar donde quiere ver la temperatura: ")
+temp=input("Ingrese que desea buscar (tmin/tmax): ")
+dia=int(input("Ingrese cuantos dias atras quiere buscar (0 hoy): "))
+print("La " + temp + " de " + lugar + " es: "+ nomb[lugar][temp][dia])
 
 arch.close()
